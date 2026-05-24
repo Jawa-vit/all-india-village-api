@@ -32,7 +32,7 @@ function App() {
       setLoading(true);
 
       const response = await axios.get(
-        "http://localhost:3000/api/states"
+        "process.env.REACT_APP_API_URL/api/states"
       );
 
       setStates(response.data.data);
@@ -363,7 +363,7 @@ function App() {
                 Loading data...
             
               </div>
-          
+
             )
           }
 
