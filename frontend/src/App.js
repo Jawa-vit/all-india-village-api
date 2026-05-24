@@ -32,7 +32,7 @@ function App() {
       setLoading(true);
 
       const response = await axios.get(
-        "process.env.REACT_APP_API_URL/api/states"
+        `${process.env.REACT_APP_API_URL}/api/states`
       );
 
       setStates(response.data.data);
@@ -57,7 +57,7 @@ function App() {
       setLoading(true);
 
       const response = await axios.get(
-        `http://localhost:3000/api/districts/${stateId}`
+        `${process.env.REACT_APP_API_URL}/api/districts/${stateId}`
       );
 
       setDistricts(response.data.data);
@@ -85,7 +85,7 @@ function App() {
       setLoading(true);
 
       const response = await axios.get(
-        `http://localhost:3000/api/subdistricts/${districtId}`
+        `${process.env.REACT_APP_API_URL}/api/subdistricts/${districtId}`
       );
 
       setSubDistricts(response.data.data);
@@ -112,7 +112,7 @@ function App() {
       setLoading(true);
 
       const response = await axios.get(
-        `http://localhost:3000/api/villages/${subDistrictId}`
+        `${process.env.REACT_APP_API_URL}/api/villages/${subDistrictId}`
       );
 
       setVillages(response.data.data);
@@ -139,7 +139,7 @@ function App() {
         setError("");
       
         const response = await axios.get(
-          `http://localhost:3000/api/search?q=${searchQuery}`,
+          `${process.env.REACT_APP_API_URL}/api/search?q=${searchQuery}`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -224,7 +224,7 @@ function App() {
 
             <option>-- Select State --</option>
 
-            {states.map((state) => (
+            {(states || []).map((state) => (
 
               <option key={state.id} value={state.id}>
                 {state.name}
@@ -250,7 +250,7 @@ function App() {
 
             <option>-- Select District --</option>
 
-            {districts.map((district) => (
+            {(districts || []).map((district) => (
 
               <option key={district.id} value={district.id}>
                 {district.name}
@@ -276,10 +276,10 @@ function App() {
 
             <option>-- Select SubDistrict --</option>
 
-            {subDistricts.map((subdistrict) => (
+            {(subDistricts || []).map((sub) => (
 
-              <option key={subdistrict.id} value={subdistrict.id}>
-                {subdistrict.name}
+              <option key={sub.id} value={sub.id}>
+                {sub.name}
               </option>
 
             ))}
@@ -299,7 +299,7 @@ function App() {
 
             <option>-- Select Village --</option>
 
-            {villages.map((village) => (
+            {(villages || []).map((village) => (
 
               <option key={village.id}>
                 {village.name}
@@ -370,7 +370,7 @@ function App() {
           {/* RESULTS */}
           <div className="mt-6 grid gap-4">
 
-            {searchResults.map((village) => (
+            {(searchResults || []).map((village) => (
 
               <div
                 key={village.id}
